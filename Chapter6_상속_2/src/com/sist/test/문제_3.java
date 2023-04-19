@@ -78,6 +78,9 @@ package com.sist.test;
 		   int => 0
 		   double => 0.0
 		   boolean -> false
+
+		   
+		   
 		   String -> null
 		   null => 참조하는 주소가 없는 경우
 			=> String s=null
