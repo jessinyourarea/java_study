@@ -97,7 +97,7 @@ package com.sist.io;
  		
     => read() , write() , close()
     
-    FileIntputPutStream 
+    FileInputStream 
     -------------------
     int read(O)
     File Reader

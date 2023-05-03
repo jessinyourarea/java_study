@@ -12,8 +12,9 @@ package com.sist.lib;
     		   		    |
     		------------------------------
     		|							 |
-    	Error							Exception (예외처리의 최상위클래스)
+    	   Error					Exception (예외처리의 최상위클래스)
     									 |
+    				-------------------------------------------------					 
     			CheckedException							UncheckedException
     			컴파일 시 예외처리여부 확인							예외처리 여부를 확인하지 않는다 
     			= 반드시 예외처리 해야함							=> 필요시에만 작업
