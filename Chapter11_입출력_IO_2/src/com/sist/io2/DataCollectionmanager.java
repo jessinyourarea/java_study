@@ -10,9 +10,10 @@ import org.jsoup.select.Elements;
 import java.io.*;
 import java.net.*;
 /*
- <table class="list-wrap">
+ *<table class="list-wrap">
+   
    <tbody>
-<tr class="list rank-1" songid="101268096">
+  <tr class="list rank-1" songid="101268096">
     <td class="check"><input type="checkbox" class="select-check" title=" I AM ">
    </td><td class="number">1
        <span class="rank"><span class="rank-none"><span class="hide">유지</span></span></span>
@@ -28,11 +29,10 @@ I AM</a>
                </dl>
            </div>
             <i class="bar">|</i>
-            <a href="#" class="albumtitle ellipsis" onclick="fnViewAlbumLayer(83665559); return false;" ontouchend="fnViewAlbumLayer(83665559); return false;">I've IVE</a>
+            <a href="#" id="albumtitle ellipsis" onclick="fnViewAlbumLayer(83665559); return false;" ontouchend="fnViewAlbumLayer(83665559); return false;">I've IVE</a>
         </td>
  */
-
-public class DataCollectionmanager {
+public class DataCollectionManager {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -40,124 +40,130 @@ public class DataCollectionmanager {
 				new ArrayList<GenieMusicVO>();
 		FileOutputStream fos=null;
 		ObjectOutputStream oos=null;
-		try 
-		{
-			fos=new FileOutputStream("c:\\java_datas\\genie_music.txt");
-			oos=new ObjectOutputStream(fos);
-			// 사이트 연결
-			String[] urls={
-				"https://www.genie.co.kr/chart/genre?ditc=D&ymd=20230502&genrecode=M0100",
-				"https://www.genie.co.kr/chart/genre?ditc=D&ymd=20230502&genrecode=M0200",
-				"https://www.genie.co.kr/chart/genre?ditc=D&ymd=20230502&genrecode=M0300",
-				"https://www.genie.co.kr/chart/genre?ditc=D&ymd=20230502&genrecode=M0107",
-				"https://www.genie.co.kr/chart/genre?ditc=D&ymd=20230502&genrecode=M0500",
-				"https://www.genie.co.kr/chart/genre?ditc=D&ymd=20230502&genrecode=M0600"
-			};
-			/*
-			 	private int no;
-				private String title;
-				private String singer;
-				private String album;
-				private String poster;
-				private int idcrement;	//등폭
-				private String state; //상태: 유지 상승 하강
-				private int cno; //구분자
-				private String key;	
-			 */
-			int k=1; //고유번호 
-			for(int i=0;i<urls.length;i++)
-			{
-				Document doc=Jsoup.connect(urls[i]).get();
-				Elements title=doc.select("table.list-wrap td.info a.title");
-				Elements singer=doc.select("table.list-wrap td.info a.artist");
-				Elements album=doc.select("table.list-wrap td.info a.albumtitle");
-				Elements poster=doc.select("table.list-wrap a.cover img");
-				Elements etc=doc.select("table.list-wrap span.rank");
-				
-				for(int j=0;j<title.size();j++)
-				{
-					System.out.println("고유번호:"+k);
-					System.out.println("카테고리번호:"+(i+1));
-					System.out.println(title.get(j).text());
-					System.out.println(singer.get(j).text());
-					System.out.println(album.get(j).text());
-					System.out.println(poster.get(j).attr("src"));
-					String ss=etc.get(j).text();
-	//				System.out.println(ss);
-					String state="";
-					String id=""; //등폭
-					if(ss.contains("유지"))
-					{
-						state="유지";
-						id="0";
-					}
-					else if(ss.contains("new"))
-					{
-						state="NEW";
-						id="0";
-					}
-					else
-					{
-						state=ss.replaceAll("[0-9]",""); //상승
-						id=ss.replaceAll("[가-힣]","");	//숫자
-					}
-//					System.out.println(etc.get(j).text());
-					System.out.println("상태:"+state);
-					System.out.println("등폭:"+id);
-					System.out.println("동영상:");
-					System.out.println("===================================");
-					GenieMusicVO vo=new GenieMusicVO();
-					vo.setNo(k);
-					vo.setCno(i+1);
-					vo.setTitle(title.get(j).text());
-					vo.setSinger(singer.get(j).text());
-					vo.setAlbum(album.get(j).text());
-					vo.setPoster(poster.get(j).attr("src"));
-					vo.setState(state);
-					vo.setIdcrement(Integer.parseInt(id));
-					vo.setKey(youtubeKeyData(title.get(j).text()));
-					list.add(vo);
-					k++;
-				}
-				///watch?v=
-			}
-			
-			oos.writeObject(list);
-			System.out.println("저장 완료!!");
-		}catch(Exception ex)
-		{
-			ex.printStackTrace();
-		}
-		finally
-		{
-			try
-			{
-				fos.close();
-				oos.close();
-			}catch(Exception ex) {}
-		}
+        try
+        {
+        	fos=new FileOutputStream("c:\\java_datas\\genie_music.txt");
+        	oos=new ObjectOutputStream(fos);
+        	// 사이트 연결 
+        	String[] urls={
+        		"https://www.genie.co.kr/chart/genre?ditc=D&ymd=20230502&genrecode=M0100",
+        		"https://www.genie.co.kr/chart/genre?ditc=D&ymd=20230502&genrecode=M0200",
+        		"https://www.genie.co.kr/chart/genre?ditc=D&ymd=20230502&genrecode=M0300",
+        		"https://www.genie.co.kr/chart/genre?ditc=D&ymd=20230502&genrecode=M0107",
+        		"https://www.genie.co.kr/chart/genre?ditc=D&ymd=20230502&genrecode=M0500",
+        		"https://www.genie.co.kr/chart/genre?ditc=D&ymd=20230502&genrecode=M0600"
+        	};
+        	/*
+        	 *  private int no;
+		        private String title;
+		        private String singer;
+		        private String album;
+		        private String poster;
+		        private int idcrement; // 등폭 
+		        private String state; //유지,상승,하강 
+		        private int cno;//구분자 
+		        private String key; // 동영상 
+        	 */
+        	
+        	int k=1; // 고유번호 
+        	for(int i=0;i<urls.length;i++)
+        	{
+        		Document doc=Jsoup.connect(urls[i]).get();
+        		Elements title=doc.select("table.list-wrap td.info a.title");
+        		Elements singer=doc.select("table.list-wrap td.info a.artist");
+        		Elements album=doc.select("table.list-wrap td.info a.albumtitle");
+        		Elements poster=doc.select("table.list-wrap a.cover img");
+        		Elements etc=doc.select("table.list-wrap span.rank");
+        		/*
+        		 *   <a>값</a> => text()
+        		 *   <img src="이미지주소">
+        		 */
+        		for(int j=0;j<title.size();j++)
+        		{
+        			System.out.println("고유번호:"+k);
+        			System.out.println("카테고리번호:"+(i+1));
+        			System.out.println(title.get(j).text());
+        			System.out.println(singer.get(j).text());
+        			System.out.println(album.get(j).text());
+        			System.out.println(poster.get(j).attr("src"));
+        			String ss=etc.get(j).text();
+        			//System.out.println(ss);
+        			String state="";
+        			String id="";// 등폭 
+        			// 
+        			if(ss.contains("유지"))
+        			{
+        				state="유지";
+        				id="0";
+        			}
+        			else if(ss.contains("new"))
+        			{
+        				state="NEW";
+        				id="0";
+        			}
+        			// 4
+        			else
+        			{
+        				state=ss.replaceAll("[0-9]", "");// 상승
+        				id=ss.replaceAll("[가-힣]", "");//4
+        			}
+        			System.out.println("상태:"+state);
+        			System.out.println("등폭:"+id);
+        			System.out.println("동영상:");
+        			System.out.println("=========================");
+        			GenieMusicVO vo=new GenieMusicVO();
+        			vo.setNo(k);
+        			vo.setCno(i+1);
+        			vo.setTitle(title.get(j).text());
+        			vo.setSinger(singer.get(j).text());
+        			vo.setAlbum(album.get(j).text());
+        			vo.setPoster(poster.get(j).attr("src"));
+        			vo.setState(state);
+        			vo.setIdcrement(Integer.parseInt(id));
+        			vo.setKey(youtubeKeyData(title.get(j).text()));
+        			list.add(vo);
+        		    k++;
+        		}
+        	}
+        	
+        	oos.writeObject(list);
+        	System.out.println("저장 완료!!");
+        }catch(Exception ex)
+        {
+        	ex.printStackTrace();
+        }
+        finally
+        {
+        	try
+        	{
+        		fos.close();
+        		oos.close();
+        	}catch(Exception ex){}
+        }
 	}
 	public static String youtubeKeyData(String title)
 	{
 		String key="";
-		try{
-			String url="https://www.youtube.com/results?search_query="+URLEncoder.encode(title,"UTF-8");
+		try
+		{
+			String url="https://www.youtube.com/results?search_query="
+		               +URLEncoder.encode(title, "UTF-8");
 			Document doc=Jsoup.connect(url).get();
 			String data=doc.toString();
 			Pattern p=Pattern.compile("/watch\\?v=[^가-힣]+");
+			// /watch?v=BOjSR3L_f-w\u0026pp=ygUJ7JWE7J2067iM"
 			Matcher m=p.matcher(data);
 			while(m.find())
 			{
 				String s=m.group();
-				//s=/watch?v=aeJOyqdsMlU\u0026pp=ygUGS2l0c2No" (= 다음부터 "까지는 =+1~ "
+				// s=/watch?v=BOjSR3L_f-w\u0026pp=ygUJ7JWE7J2067iM"
 				s=s.substring(s.indexOf("=")+1,s.indexOf("\""));
 				key=s;
 				break;
 			}
 			
-		} catch(Exception ex) {}
+		}catch(Exception ex){}
 		return key;
-		
 	}
 
 }
