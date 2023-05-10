@@ -23,7 +23,51 @@ import java.net.*;
  	   ----------------------> Thread로 수행
  	   
  	웹에서 필요한 기술
- 	=> 데이터 베이스
+ 	=> 데이터 베이스 (오라클=> MySQL)
+ 	   -------------------------MyBatis / JPA
+ 	=> 데이터 베이스 제어 => 자바
+ 		자바
+ 		클래스 개념 / 인터페이스 / 예외처리 / 라이브러리
+ 				   -------- 요구사항 분석(기능)
+ 	    --------- 변수/메소드/생성자
+ 	    java.lang
+ 	    	Object / String / StringBuffer / Math / Wrapper
+ 	    java.util
+ 	    	StringTokenizer / Date, Calendar
+ 	    	Collection => ArrayList , HashMap , HashSet
+ 	    Java.net
+ 	    	URL , URLEncoder (.getBytes)
+ 	    java.io	: 웹 => 업로드, 다운로드 (File)
+	  	  	Buffered~
+	  	 	FileInputStream/FileOutputStream
+	  	 	FileReader/FileWriter
+	  	 	BufferedReader/ File
+ 	    java.text
+ 	    	SimpleDateFormat
+ 	    -------------------------------------------------------------
+ 	    2차 자바 (Web관련)
+ 	      java.sql , javax.sql , javax.naming
+ 	      javax.servlet.*
+ 	      
+ 	       브라우저 ===== 자바 ======== 오라클
+ 	       윈도우  ===== 자바 ======== 파일
+ 	       			------- 데이터읽기 / 데이터보내기
+ 	    => 1) 오라클 제어
+	 	    	SELECT / UPDATE / DELETE / INSERT => DML
+	 	    	---------------------------------    데이터조작언어
+	 	    	CREATE / ALTER / DROP / TRUNCATE / RENAME => DDL
+	 	    	-----------------------------------------    데이터 저장/생성 언어
+	 	    	GRANT / REVOKE	=> DCL
+	 	    	--------------		(Admin)
+	 	    	COMMIT / ROLLBACK	=> TCL
+	 	    						   일괄 처리 프로그램
+ 	  	   2) 기타 : VIEW/SEQUENCE/PS-SQL(FUNCTION,PROCEDURE/TRIGGER)
+ 	  	   3) 데이터베이스 모델링 (정규화 , 제약조건)
+ 	  	=> 브라우저에 데이터 출력 : HTML / CSS/ JavaScript
+ 	  	=> 자바스크립트 라이브러리 : JQuery / AJax 
+ 	  							------------
+ 	    
+ 	    
  */
 public class NetworkMain extends JFrame implements ActionListener, Runnable, MouseListener{
 	MenuPanel mp;
