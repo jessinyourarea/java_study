@@ -124,7 +124,7 @@ public class Server implements Runnable {
 		{
 			String id,name,sex;
 			
-			//클라이언트에서 보낸 값 일기
+			//클라이언트에서 보낸 값 읽기
 			BufferedReader in;
 			
 			//클라이언트로 결과값 전송
@@ -260,6 +260,26 @@ public class Server implements Runnable {
 										break;
 									}
 								}
+							}
+							break;
+							case Function.EXIT:
+							{
+								String mid=st.nextToken();
+								int i=0;
+								for(Client user:waitVc)
+								{
+									if(user.id.equals(mid))
+									{
+										user.messageTo(Function.MYEXIT+"|");
+										waitVc.remove(i);
+										in.close();
+										out.close();
+										//서버종료 
+										break;
+									}
+									i++;
+								}
+								messageAll(Function.EXIT+"|"+mid);
 							}
 							break;
 							}

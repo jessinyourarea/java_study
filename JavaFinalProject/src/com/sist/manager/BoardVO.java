@@ -1,4 +1,5 @@
 package com.sist.manager;
+import java.io.Serializable;
 /*	게시판
  	파일 입출력>
  	
@@ -38,7 +39,7 @@ package com.sist.manager;
 							 
  */
 import java.util.*;
-public class BoardVO {
+public class BoardVO implements Serializable{
 	private int no;	//중복이 없게 처리(그래야 수정/삭제가 가능함)
 	private String name;
 	private String subject;
