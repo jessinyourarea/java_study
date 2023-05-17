@@ -267,7 +267,13 @@ public class EmpDAO {
 			ResultSet rs=ps.executeQuery();
 			while(rs.next())
 			{
-				
+				EmpVO vo=new EmpVO();
+				vo.setEmpno(rs.getInt(1));
+				vo.setEname(rs.getString(2));
+				vo.setJob(rs.getString(3));
+				vo.setHiredate(rs.getDate(4));
+				vo.setSal(rs.getInt(5));
+				list.add(vo);
 			}
 			
 		}catch(Exception ex)
@@ -278,7 +284,7 @@ public class EmpDAO {
 		{
 			disConnection();
 		}
-		return vo;
+		return list;
 	}
 	
 	

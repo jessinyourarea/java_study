@@ -32,7 +32,7 @@ I AM</a>
             <a href="#" id="albumtitle ellipsis" onclick="fnViewAlbumLayer(83665559); return false;" ontouchend="fnViewAlbumLayer(83665559); return false;">I've IVE</a>
         </td>
  */
-public class DataCollectionManager {
+public class DataCollectionmanager {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub

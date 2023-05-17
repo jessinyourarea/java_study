@@ -70,6 +70,25 @@ public class EmpMain {
 				System.out.println("성과급:"+vo.getComm());
 				System.out.println("부서번호:"+vo.getDeptno());
 			}
+			else if(menu==4)
+			{
+				System.out.print("검색할 이름 입력:");
+				String ename=scan.next();
+				List<EmpVO> list=dao.empSearchData(ename);
+				for(EmpVO vo:list)
+				{
+					System.out.println(vo.getEname()+" "
+										+vo.getJob()+" "
+										+vo.getEmpno()+" "
+										+vo.getHiredate()+" "
+										+vo.getSal());
+				}
+			}
+			else
+			{
+				System.out.println("잘못 입력했습니다. 다시 입력하세요.");
+				continue;
+			}
 		}
 	}
 
